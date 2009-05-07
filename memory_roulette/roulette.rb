@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 # Originally from:
 #   http://lwn.net/Articles/322149/
 #
@@ -13,4 +13,6 @@
 #
 # TODO(dbalatero): Get the offsets right
 
-sudo dd if=/dev/urandom of=/dev/mem bs=1 count=1 seek=0 skip=$RANDOM
+rand_offset = rand(1024 * 1024) # seek between [0, 1mb]
+cmd = "sudo dd if=/dev/urandom of=/dev/mem bs=1k count=1 seek=#{rand_offset}"
+system(cmd)
